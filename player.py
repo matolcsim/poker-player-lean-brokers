@@ -1,4 +1,3 @@
-
 class Player:
     VERSION = "v3.0"
 
@@ -69,9 +68,9 @@ class Player:
             counter1 = 1
             counter2 = 1
             for card in board:
-                if card == card1_rank:
+                if card['rank'] == card1_rank:
                     counter1 += 1
-                if card == card2_rank:
+                if card['rank'] == card2_rank:
                     counter2 += 1
             if counter1 == 2 and counter2 == 3 or counter1 == 3 and counter2 == 2:
                 return 'fullhouse'
@@ -79,14 +78,17 @@ class Player:
         elif card1_rank == card2_rank:
             counter1 = 2
             counter2 = 1
-            sorted_cards = Player().sort_by_ranking(board)
-            for i in range(len(sorted_cards) - 1):
-                if sorted_cards[i + 1] == sorted_cards[i]:
+            sorted = Player().sort_by_ranking(self, board)
+            print(sorted)
+            for i in range(len(sorted) - 1):
+                if sorted[i]['rank'] == sorted[i + 1]['rank']:
                     counter2 += 1
-                    if counter2 == 3:
+                    if counter1 == 2 and counter2 == 3 or counter1 == 3 and counter2 == 2:
                         return 'fullhouse'
-                else:
-                    counter = 1
+                if sorted[i]['rank'] == card1_rank:
+                    counter1 += 1
+                    if counter1 == 2 and counter2 == 3 or counter1 == 3 and counter2 == 2:
+                        return 'fullhouse'
 
             # FLUSH
             if card1_suit == card2_suit:
