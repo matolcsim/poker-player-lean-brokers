@@ -87,6 +87,31 @@ class Player:
 
         return 'nothing'
 
+    def sort_by_ranking():
+        for card in community_cards:
+            if card['rank'] == 'J':
+                card['rank'] = '11'
+            elif card['rank'] == 'Q':
+                card['rank'] = '12'
+            elif card['rank'] == 'K':
+                card['rank'] = '13'
+            elif card['rank'] == 'A':
+                card['rank'] = '14'
+
+        sorted_cards = sorted(community_cards, key=lambda x: int(x['rank']), reverse=True)
+
+        for card in community_cards:
+            if card['rank'] == '11':
+                card['rank'] = 'J'
+            elif card['rank'] == '12':
+                card['rank'] = 'Q'
+            elif card['rank'] == '13':
+                card['rank'] = 'K'
+            elif card['rank'] == '14':
+                card['rank'] = 'A'
+
+        return sorted_cards
+
 
     def showdown(self, game_state):
         pass
