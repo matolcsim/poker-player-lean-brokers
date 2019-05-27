@@ -104,7 +104,6 @@ class Player:
 
         return 'nothing'
 
-
     def showdown(self, game_state):
         pass
 
