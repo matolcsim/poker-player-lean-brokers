@@ -53,7 +53,6 @@ class Player:
             if counter == 4:
                 return 'poker'
 
-
         # FULL HOUSE
         if card1_rank != card2_rank:
             counter1 = 1
@@ -69,18 +68,16 @@ class Player:
         elif card1_rank == card2_rank:
             counter1 = 2
             counter2 = 1
-            sorted = sort_by_ranking(board)
-            for i in range(len(sorted)-1):
-                if sorted[i+1] == sorted[i]:
+            sorted_cards = Player().sort_by_ranking(board)
+            for i in range(len(sorted_cards) - 1):
+                if sorted_cards[i + 1] == sorted_cards[i]:
                     counter2 += 1
                     if counter2 == 3:
                         return 'fullhouse'
                 else:
                     counter = 1
 
-
-
-        # FLUSH
+            # FLUSH
             if card1_suit == card2_suit:
                 suit_counter = 2
             for card in board:
@@ -100,7 +97,54 @@ class Player:
                 if suit1_counter >= 5 or suit2_counter >= 5:
                     return 'flush'
 
+
+        # Straight
+
+
         return 'nothing'
+
+    def sort_by_ranking(self, community_cards):
+        for card in community_cards:
+            if card['rank'] == 'J':
+                card['rank'] = '11'
+            elif card['rank'] == 'Q':
+                card['rank'] = '12'
+            elif card['rank'] == 'K':
+                card['rank'] = '13'
+            elif card['rank'] == 'A':
+                card['rank'] = '14'
+
+        sorted_cards = sorted(community_cards, key=lambda x: int(x['rank']), reverse=True)
+
+        for card in community_cards:
+            if card['rank'] == '11':
+                card['rank'] = 'J'
+            elif card['rank'] == '12':
+                card['rank'] = 'Q'
+            elif card['rank'] == '13':
+                card['rank'] = 'K'
+            elif card['rank'] == '14':
+                card['rank'] = 'A'
+
+        return sorted_cards
+
+
+    def card_differences(self, hole_cards):
+        for card in hole_cards:
+            if card['rank'] == 'J':
+                card['rank'] = 11
+            elif card['rank'] == 'Q':
+                card['rank'] = 12
+            elif card['rank'] == 'K':
+                card['rank'] = 13
+            elif card['rank'] == 'A':
+                card['rank'] = 14
+            elif type(card['rank']) == 'string':
+                card['rank'] = int(card['rank'])
+
+            sorted_cards = sorted(hole_cards, key=lambda x: int(x['rank']), reverse=True)
+
+            return sorted_cards[0] - sorted_cards[1]
 
 
     def showdown(self, game_state):
