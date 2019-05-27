@@ -78,7 +78,7 @@ class Player:
         elif card1_rank == card2_rank:
             counter1 = 2
             counter2 = 1
-            sorted = Player().sort_by_ranking(self, board)
+            sorted = Player().sort_by_ranking(board)
             print(sorted)
             for i in range(len(sorted) - 1):
                 if sorted[i]['rank'] == sorted[i + 1]['rank']:
