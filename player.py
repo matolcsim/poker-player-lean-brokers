@@ -5,7 +5,6 @@ class Player:
 
         players = game_state['players']
 
-
         for player in players:
             # PLAYER CARDS
             card1_rank = player['hole_cards'][0]['rank']
@@ -20,8 +19,7 @@ class Player:
             bet = max(pot, big_blind)
             all_in = player['stack']
 
-            # HANDS
-            POKER =
+            BOARD = game_state['community_cards']  # LIST
 
             # 'MAIN'
             if player['name'] == "Lean Brokers":
@@ -32,6 +30,35 @@ class Player:
 
         return 0
 
+    def hands(self, board, card1_rank, card2_rank):
+        # HANDS
+        # POKER
+        if card1_rank == card2_rank:
+            counter = 2
+        elif card1_rank != card2_rank:
+            counter = 1
+        for card in board:
+            if card['rank'] == card1_rank:
+                counter += 1
+            if counter == 4:
+                return 'poker'
+
+        if card1_rank == card2_rank:
+            counter = 2
+        elif card1_rank != card2_rank:
+            counter = 1
+        for card in board:
+            if card['rank'] == card2_rank:
+                counter += 1
+            if counter == 4:
+                return 'poker'
+
+
+        # FULL HOUSE
+        counter1 = 0
+        counter2 = 0
+        for card in board:
+
+
     def showdown(self, game_state):
         pass
-
