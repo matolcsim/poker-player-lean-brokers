@@ -55,9 +55,37 @@ class Player:
 
 
         # FULL HOUSE
-        counter1 = 0
-        counter2 = 0
-        for card in board:
+        if card1_rank != card2_rank:
+            counter1 = 1
+            counter2 = 1
+            for card in board:
+                if card == card1_rank:
+                    counter1 += 1
+                if card == card2_rank:
+                    counter2 += 1
+            if counter1 == 2 and counter2 == 3 or counter1 == 3 and counter2 == 2:
+                return 'fullhouse'
+
+        elif card1_rank == card2_rank:
+            counter1 = 2
+            counter2 = 1
+            sorted = sort_by_ranking(board)
+            for i in range(len(sorted)-1):
+                if sorted[i+1] == sorted[i]:
+                    counter2 += 1
+                    if counter2 == 3:
+                        return 'fullhouse'
+                else:
+                    counter = 1
+
+
+
+        # FLUSH
+
+
+
+
+        return 'nothing'
 
 
     def showdown(self, game_state):
