@@ -10,13 +10,16 @@ class Player:
         for player in players:
             # PLAYER CARDS
             card1_rank = player['hole_cards'][0]['rank']
-            card1_suite = player['hole_cards'][0]['suite']
+            card1_suit = player['hole_cards'][0]['suit']
             card2_rank = player['hole_cards'][1]['rank']
-            card2_suite = player['hole_cards'][1]['suite']
+            card2_suit = player['hole_cards'][1]['suit']
+
 
             # BET SIZES
+            current_buy_in = game_state['current_buy_in']
             pot = game_state['pot']
             big_blind = game_state['big_blind']
+            call = current_buy_in - player['bet']
             half_pot = pot / 2
             bet = max(pot, big_blind)
             all_in = player['stack']
@@ -28,7 +31,13 @@ class Player:
                 if player['hole_cards'][0]['rank'] == player['hole_cards'][1]['rank']:
                     if player['hole_cards'][0]['rank'] in ['K', 'A', 'Q', 'J']:
                         return player['stack']
-                    return bet
+                    elif current_buy_in < (all_in / 5):
+                        return call
+                elif current_buy_in < (all_in / 5) and (card1_rank in ['8', '9', '10', 'J', 'Q', 'K', 'A']) and diference() < 2: #card1_suit == card2_suit
+                    return call
+
+
+                return bet
 
         return 0
 
