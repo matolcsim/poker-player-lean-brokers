@@ -26,17 +26,22 @@ class Player:
             BOARD = game_state['community_cards']  # LIST
 
             # 'MAIN'
-            if player['name'] == "Lean Brokers":
+            # PREFLOP STRAT
+            if player['name'] == "Lean Brokers" and len(BOARD) < 3:
                 if card1_rank == card2_rank:
                     if card1_rank in ['K', 'A', 'Q', 'J']:
                         return all_in
                     elif current_buy_in < (all_in / 5):
                         return call
-                elif current_buy_in < (all_in / 5) and (card1_rank in ['8', '9', '10', 'J', 'Q', 'K', 'A']) and Player().card_differences(player['hole_cards']) < 2: #card1_suit == card2_suit
+                elif current_buy_in < (all_in / 5) and (card1_rank in ['8', '9', '10', 'J', 'Q', 'K', 'A']) and (card2_rank in ['8', '9', '10', 'J', 'Q', 'K', 'A']) and card1_suit == card2_suit:
                     return call
 
+            if player['name'] == "Lean Brokers" and len(BOARD) == 3:
+                if Player().hands(BOARD, card1_rank, card2_rank, card1_suit, card2_suit) in ['poker', 'fullhouse', 'flush']:
+                    return all_in
 
-                return bet
+
+
 
         return 0
 
@@ -202,7 +207,7 @@ class Player:
                 elif card1_rank in ['K', 'A', 'Q', 'J'] and card2_rank  in ['K', 'A', 'Q', 'J']:
                     return "two_pair_two_big"
                 else:
-                    return "two_par"
+                    return "two_pair"
 
     def drill(self, card1_rank, card2_rank, community):
 
