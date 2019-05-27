@@ -6,6 +6,7 @@ class Player:
 
         players = game_state['players']
 
+
         for player in players:
             # PLAYER CARDS
             card1_rank = player['hole_cards'][0]['rank']
@@ -20,13 +21,89 @@ class Player:
             bet = max(pot, big_blind)
             all_in = player['stack']
 
-            # HANDS
-            POKER =
+            BOARD = game_state['community_cards']  # LIST
 
             # 'MAIN'
             if player['name'] == "Lean Brokers":
+                if player['hole_cards'][0]['rank'] == player['hole_cards'][1]['rank']:
+                    if player['hole_cards'][0]['rank'] in ['K', 'A', 'Q', 'J']:
+                        return player['stack']
+                    return bet
 
         return 0
+
+    def hands(self, board, card1_rank, card2_rank, card1_suit, card2_suit):
+        # HANDS
+        # POKER
+        if card1_rank == card2_rank:
+            counter = 2
+        elif card1_rank != card2_rank:
+            counter = 1
+        for card in board:
+            if card['rank'] == card1_rank:
+                counter += 1
+            if counter == 4:
+                return 'poker'
+
+        if card1_rank == card2_rank:
+            counter = 2
+        elif card1_rank != card2_rank:
+            counter = 1
+        for card in board:
+            if card['rank'] == card2_rank:
+                counter += 1
+            if counter == 4:
+                return 'poker'
+
+
+        # FULL HOUSE
+        if card1_rank != card2_rank:
+            counter1 = 1
+            counter2 = 1
+            for card in board:
+                if card == card1_rank:
+                    counter1 += 1
+                if card == card2_rank:
+                    counter2 += 1
+            if counter1 == 2 and counter2 == 3 or counter1 == 3 and counter2 == 2:
+                return 'fullhouse'
+
+        elif card1_rank == card2_rank:
+            counter1 = 2
+            counter2 = 1
+            sorted = sort_by_ranking(board)
+            for i in range(len(sorted)-1):
+                if sorted[i+1] == sorted[i]:
+                    counter2 += 1
+                    if counter2 == 3:
+                        return 'fullhouse'
+                else:
+                    counter = 1
+
+
+
+        # FLUSH
+            if card1_suit == card2_suit:
+                suit_counter = 2
+            for card in board:
+                if card['suit'] == card1_suit:
+                    counter += 1
+                if counter == 5:
+                    return 'flush'
+
+            if card1_suit != card2_suit:
+                suit1_counter = 1
+                suit2_counter = 1
+                for card in board:
+                    if card['suit'] == card1_suit:
+                        suit1_counter += 1
+                    elif card['suit'] == card2_suit:
+                        suit2_counter += 1
+                if suit1_counter >= 5 or suit2_counter >= 5:
+                    return 'flush'
+
+        return 'nothing'
+
 
     def showdown(self, game_state):
         pass
