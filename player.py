@@ -18,7 +18,7 @@ class Player:
             current_buy_in = game_state['current_buy_in']
             pot = game_state['pot']
             big_blind = game_state['big_blind']
-            call = current_buy_in - player['bet']
+            call = int(current_buy_in) - int(player['bet'])
             half_pot = pot / 2
             bet = max(pot, big_blind)
             all_in = player['stack']
