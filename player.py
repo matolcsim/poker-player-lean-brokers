@@ -1,6 +1,6 @@
 
 class Player:
-    VERSION = "v0.1"
+    VERSION = "v0.2"
 
     def betRequest(self, game_state):
         return 0
