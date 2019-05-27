@@ -11,6 +11,8 @@ class Player:
         for player in players:
             if player['name'] == "Lean Brokers":
                 if player['hole_cards'][0]['rank'] == player['hole_cards'][1]['rank']:
+                    if player['hole_cards'][0]['rank'] in ['K', 'A', 'Q', 'J']:
+                        return player['stack']
                     return bet
 
         return 0
