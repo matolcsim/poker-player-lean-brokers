@@ -36,6 +36,7 @@ class Player:
                 elif current_buy_in < (all_in / 5) and (card1_rank in ['8', '9', '10', 'J', 'Q', 'K', 'A']) and (card2_rank in ['8', '9', '10', 'J', 'Q', 'K', 'A']) and card1_suit == card2_suit:
                     return call
 
+            #FLOP STRAT
             if player['name'] == "Lean Brokers" and len(BOARD) == 3:
                 if Player().hands(BOARD, card1_rank, card2_rank, card1_suit, card2_suit) in ['poker', 'fullhouse', 'flush']:
                     return all_in
