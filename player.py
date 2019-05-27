@@ -32,9 +32,9 @@ class Player:
                     if card1_rank in ['K', 'A', 'Q', 'J']:
                         return all_in
                     elif current_buy_in < (all_in / 5):
-                        return call
+                        return int(call)
                 elif current_buy_in < (all_in / 5) and (card1_rank in ['8', '9', '10', 'J', 'Q', 'K', 'A']) and (card2_rank in ['8', '9', '10', 'J', 'Q', 'K', 'A']) and card1_suit == card2_suit:
-                    return call
+                    return int(call)
 
             #FLOP STRAT
             if player['name'] == "Lean Brokers" and len(BOARD) == 3:
