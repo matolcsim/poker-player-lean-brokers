@@ -30,7 +30,7 @@ class Player:
 
         return 0
 
-    def hands(self, board, card1_rank, card2_rank):
+    def hands(self, board, card1_rank, card2_rank, card1_suit, card2_suit):
         # HANDS
         # POKER
         if card1_rank == card2_rank:
@@ -81,9 +81,24 @@ class Player:
 
 
         # FLUSH
+            if card1_suit == card2_suit:
+                suit_counter = 2
+            for card in board:
+                if card['suit'] == card1_suit:
+                    counter += 1
+                if counter == 5:
+                    return 'flush'
 
-
-
+            if card1_suit != card2_suit:
+                suit1_counter = 1
+                suit2_counter = 1
+                for card in board:
+                    if card['suit'] == card1_suit:
+                        suit1_counter += 1
+                    elif card['suit'] == card2_suit:
+                        suit2_counter += 1
+                if suit1_counter >= 5 or suit2_counter >= 5:
+                    return 'flush'
 
         return 'nothing'
 
