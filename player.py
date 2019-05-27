@@ -69,7 +69,7 @@ class Player:
         elif card1_rank == card2_rank:
             counter1 = 2
             counter2 = 1
-            sorted = sort_by_ranking(board)
+            sorted = Player().sort_by_ranking(board)
             for i in range(len(sorted)-1):
                 if sorted[i+1] == sorted[i]:
                     counter2 += 1
@@ -102,8 +102,8 @@ class Player:
 
         return 'nothing'
 
-    def sort_by_ranking():
-        for card in community_cards:
+    def sort_by_ranking(self, board):
+        for card in board:
             if card['rank'] == 'J':
                 card['rank'] = '11'
             elif card['rank'] == 'Q':
@@ -113,9 +113,9 @@ class Player:
             elif card['rank'] == 'A':
                 card['rank'] = '14'
 
-        sorted_cards = sorted(community_cards, key=lambda x: int(x['rank']), reverse=True)
+        sorted_cards = sorted(board, key=lambda x: int(x['rank']), reverse=True)
 
-        for card in community_cards:
+        for card in board:
             if card['rank'] == '11':
                 card['rank'] = 'J'
             elif card['rank'] == '12':
