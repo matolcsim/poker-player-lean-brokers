@@ -33,7 +33,7 @@ class Player:
                         return all_in
                     elif current_buy_in < (all_in / 5):
                         return call
-                elif current_buy_in < (all_in / 5) and (card1_rank in ['8', '9', '10', 'J', 'Q', 'K', 'A']) and diference() < 2: #card1_suit == card2_suit
+                elif current_buy_in < (all_in / 5) and (card1_rank in ['8', '9', '10', 'J', 'Q', 'K', 'A']) and Player().card_differences(player['hole_cards']) < 2: #card1_suit == card2_suit
                     return call
 
 
