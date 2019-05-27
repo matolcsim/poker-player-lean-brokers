@@ -1,5 +1,5 @@
 class Player:
-    VERSION = "v3.0"
+    VERSION = "v2.0"
 
     def betRequest(self, game_state):
 
