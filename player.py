@@ -93,11 +93,11 @@ class Player:
             # FLUSH
             if card1_suit == card2_suit:
                 suit_counter = 2
-            for card in board:
-                if card['suit'] == card1_suit:
-                    counter += 1
-                if counter == 5:
-                    return 'flush'
+                for card in board:
+                    if card['suit'] == card1_suit:
+                        suit_counter += 1
+                    if suit_counter == 5:
+                        return 'flush'
 
             if card1_suit != card2_suit:
                 suit1_counter = 1
@@ -112,7 +112,6 @@ class Player:
 
 
         # Straight
-
 
         return 'nothing'
 
