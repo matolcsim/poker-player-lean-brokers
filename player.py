@@ -154,9 +154,9 @@ class Player:
             elif type(card['rank']) == 'string':
                 card['rank'] = int(card['rank'])
 
-            sorted_cards = sorted(hole_cards, key=lambda x: int(x['rank']), reverse=True)
+        sorted_cards = sorted(hole_cards, key=lambda x: int(x['rank']), reverse=True)
 
-            return sorted_cards[0] - sorted_cards[1]
+        return sorted_cards[0]['rank'] - sorted_cards[1]['rank']
 
 
     def showdown(self, game_state):
