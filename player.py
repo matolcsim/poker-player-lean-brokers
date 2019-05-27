@@ -15,13 +15,13 @@ class Player:
 
 
             # BET SIZES
-            current_buy_in = game_state['current_buy_in']
-            pot = game_state['pot']
-            big_blind = game_state['big_blind']
+            current_buy_in = int(game_state['current_buy_in'])
+            pot = int(game_state['pot'])
+            big_blind = int(game_state['big_blind'])
             call = int(current_buy_in) - int(player['bet'])
-            half_pot = pot / 2
+            half_pot = int(pot) / 2
             bet = max(pot, big_blind)
-            all_in = player['stack']
+            all_in = int(player['stack'])
 
             BOARD = game_state['community_cards']  # LIST
 
