@@ -28,9 +28,9 @@ class Player:
 
             # 'MAIN'
             if player['name'] == "Lean Brokers":
-                if player['hole_cards'][0]['rank'] == player['hole_cards'][1]['rank']:
-                    if player['hole_cards'][0]['rank'] in ['K', 'A', 'Q', 'J']:
-                        return player['stack']
+                if card1_rank == card2_rank:
+                    if card1_rank in ['K', 'A', 'Q', 'J']:
+                        return all_in
                     elif current_buy_in < (all_in / 5):
                         return call
                 elif current_buy_in < (all_in / 5) and (card1_rank in ['8', '9', '10', 'J', 'Q', 'K', 'A']) and diference() < 2: #card1_suit == card2_suit
